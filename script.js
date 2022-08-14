@@ -8,8 +8,6 @@
  */
 
 const drawRadder=(ctx,radderInfo,x,y,tileSize)=>{
-    const lineWidth=ctx.lineWidth;
-    console.log(lineWidth);
     for(let i=0;i<radderInfo.radder.length;i++){
         for(let j=0;j<radderInfo.radder[i].length;j++){
             const tile=radderInfo.radder[i][j];
@@ -27,7 +25,6 @@ const drawRadder=(ctx,radderInfo,x,y,tileSize)=>{
                     continue;
                 c++;
                 ctx.beginPath();
-                ctx.lineWidth=lineWidth;
                 ctx.moveTo(...tilePos);
                 ctx.lineTo(...tilePos.map((v,i,arr)=>{return v+vec[i]*0.5*tileSize}));
                 ctx.stroke();
@@ -35,7 +32,6 @@ const drawRadder=(ctx,radderInfo,x,y,tileSize)=>{
             }
             if(c>2){
                 ctx.beginPath();
-                ctx.lineWidth=lineWidth;
                 ctx.arc(...tilePos,ctx.lineWidth*2,0,Math.PI*2);
                 ctx.fill();
             }
@@ -46,13 +42,13 @@ const drawRadder=(ctx,radderInfo,x,y,tileSize)=>{
                 switch(tileInfo.type){
                     case 'motor':
                         ctx.beginPath();
-                        ctx.lineWidth=lineWidth;
 
                         ctx.arc(...tilePos,tileSize/3,0,Math.PI*2);
                         ctx.stroke();
                         ctx.textAlign='center';
                         ctx.textBaseline='middle';
-                        ctx.fillText('M',...tilePos);
+                        ctx.fillText(tileInfo.label,...tilePos);
+
                         break;
                     case 'a switch':
                         ctx.beginPath();
@@ -69,7 +65,6 @@ const drawRadder=(ctx,radderInfo,x,y,tileSize)=>{
                         ctx.stroke();
                     case 'a contact':
                         ctx.beginPath();
-                        ctx.lineWidth=lineWidth;
                         ctx.moveTo(tilePos[0]-tileSize/3,tilePos[1]);
                         ctx.lineTo(tilePos[0]+tileSize/2,tilePos[1]-tileSize/3);
                         ctx.stroke();
@@ -91,7 +86,6 @@ const drawRadder=(ctx,radderInfo,x,y,tileSize)=>{
 
                     case 'b contact':
                         ctx.beginPath();
-                        ctx.lineWidth=lineWidth;
                         ctx.moveTo(tilePos[0]-tileSize/3,tilePos[1]);
                         ctx.lineTo(tilePos[0]+tileSize/2,tilePos[1]+tileSize/3);
                         ctx.moveTo(tilePos[0]+tileSize/3,tilePos[1]);
@@ -103,6 +97,17 @@ const drawRadder=(ctx,radderInfo,x,y,tileSize)=>{
                     
                     case 'relay':
                         ctx.strokeRect(tilePos[0]-tileSize/3,tilePos[1]-tileSize/2,tileSize*2/3,tileSize);
+                        break;
+                    
+                    case 'light':
+                        ctx.beginPath();
+
+                        ctx.arc(...tilePos,tileSize/3,0,Math.PI*2);
+                        ctx.moveTo(...tilePos.map((v)=>{return v-tileSize/3/Math.sqrt(2)}));
+                        ctx.lineTo(...tilePos.map((v)=>{return v+tileSize/3/Math.sqrt(2)}));
+                        ctx.moveTo(...tilePos.map((v,i)=>{return v+(1-2*i)*tileSize/3/Math.sqrt(2)}));
+                        ctx.lineTo(...tilePos.map((v,i)=>{return v-(1-2*i)*tileSize/3/Math.sqrt(2)}));
+                        ctx.stroke();
                 }
             }
         }
