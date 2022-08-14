@@ -5,8 +5,81 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ラダー図メーカー</title>
+    <link rel="stylesheet" href="style.css"/>
+
 </head>
 <body>
-    
+    <div class="flex-parent">
+        <canvas id="canvas"></canvas>
+        <div id="circuit-code-div">
+            <h1>配置</h1>
+            <textarea id="circuit-code"></textarea>
+            <h1>部品情報(JSON)</h1>
+            <textarea id="key"></textarea>
+            <br/>
+            <button onclick="adopt()">適応</button>
+            <button onclick="save()">保存</button>
+        </div>
+    </div>
+
+
+
+    <script src="script.js"></script>
+
+    <script>
+        const circuitCode=document.getElementById('circuit-code');
+        const keys=document.getElementById('key');
+        circuitCode.value='#         #\n#######M###\n#     #   #\n#     #   #\n#######   #\n#         #\n#         #\n###########\n#         #';
+        keys.value='{\n    "M":{\n        "type":"motor",\n        "label":"M1",\n        "left":"3",\n        "right":"4"\n    },\n    "R":{\n        "type":"relay",\n        "label":"R",\n        "left":"3",\n        "right":"4"\n    },\n    "A":{\n        "type":"a contact",\n        "label":"R",\n        "left":"3",\n        "right":"4"\n    },\n    "B":{\n        "type":"b contact",\n        "label":"R",\n        "left":"3",\n        "right":"4"\n    },\n    "a":{\n        "type":"a switch",\n        "label":"SW1",\n        "left":"3",\n        "right":"4"\n    },\n    "b":{\n        "type":"b switch",\n        "label":"SW2",\n        "left":"3",\n        "right":"4"\n    }\n}';
+        const tileSize=64;
+        const info={
+            "radder":[
+                "#         #",
+                "#######M###",
+                "#     #   #",
+                "#     #   #",
+                "#######   #",
+                "#         #",
+                "#         #",
+                "###########",
+                "#         #"
+
+            ],
+            "key":{
+                "M":{
+                    "type":"motor",
+                    "label":"M1",
+                    "left":"3",
+                    "right":"4"
+                }
+            }
+        };
+        const canvas=document.getElementById('canvas');
+        const ctx=canvas.getContext('2d');
+
+
+        const save=()=>{
+            const url=canvas.toDataURL();
+            const a=document.createElement('a');
+            a.href=url;
+            a.download='data.png';
+            a.click();
+        }
+
+        const adopt=()=>{
+            info.radder=circuitCode.value.split('\n');
+            info.key=JSON.parse(keys.value);
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            canvas.height=info.radder.length*tileSize;
+            canvas.width=info.radder[0].length*tileSize;
+            canvas.style.height=600*canvas.height/canvas.width+'px';
+            ctx.strokeStyle='#000000';
+            ctx.lineWidth=4;
+            ctx.font='25px sans-serif';
+
+            drawRadder(ctx,info,0,0,tileSize);
+        }
+        adopt();
+    </script>
 </body>
 </html>

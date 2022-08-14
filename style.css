@@ -1,0 +1,17 @@
+textarea{
+    width:80%;
+    height: 200px;
+}
+
+#circuit-code-div{
+    width:80%;
+    display: block;
+}
+
+#canvas{
+    width:600px;
+}
+
+.flex-parent{
+    display: flex;
+}
