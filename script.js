@@ -49,6 +49,15 @@ const drawRadder=(ctx,radderInfo,x,y,tileSize)=>{
                         ctx.textBaseline='middle';
                         ctx.fillText(tileInfo.label,...tilePos);
 
+                        ctx.textBaseline='bottom';
+
+                        ctx.textAlign='right';
+                        ctx.fillText(tileInfo.left,tilePos[0]-tileSize/3,tilePos[1]-tileSize/16);
+
+                        ctx.textAlign='left';
+                        ctx.fillText(tileInfo.right,tilePos[0]+tileSize/3,tilePos[1]-tileSize/16);
+
+
                         break;
                     case 'a switch':
                         ctx.beginPath();
@@ -69,6 +78,20 @@ const drawRadder=(ctx,radderInfo,x,y,tileSize)=>{
                         ctx.lineTo(tilePos[0]+tileSize/2,tilePos[1]-tileSize/3);
                         ctx.stroke();
                         ctx.closePath();
+
+
+                        ctx.textAlign='center';
+                        ctx.textBaseline='top';
+
+                        ctx.fillText(tileInfo.label,tilePos[0],tilePos[1]+tileSize/16);
+                        
+                        ctx.textBaseline='bottom';
+
+                        ctx.textAlign='right';
+                        ctx.fillText(tileInfo.left,tilePos[0]-tileSize/3,tilePos[1]-tileSize/16);
+
+                        ctx.textAlign='left';
+                        ctx.fillText(tileInfo.right,tilePos[0]+tileSize/2,tilePos[1]-tileSize/16);
                         break;
                     case 'b switch':
                         ctx.beginPath();
@@ -93,10 +116,33 @@ const drawRadder=(ctx,radderInfo,x,y,tileSize)=>{
                         ctx.stroke();
                         ctx.closePath();
 
+                        ctx.textAlign='center';
+                        ctx.textBaseline='bottom';
+
+                        ctx.fillText(tileInfo.label,tilePos[0],tilePos[1]-tileSize/2);
+                        
+                        ctx.textAlign='right';
+                        ctx.fillText(tileInfo.left,tilePos[0]-tileSize/2,tilePos[1]-tileSize/16);
+
+                        ctx.textAlign='left';
+                        ctx.fillText(tileInfo.right,tilePos[0]+tileSize/3,tilePos[1]-tileSize/16);
                         break;
                     
                     case 'relay':
                         ctx.strokeRect(tilePos[0]-tileSize/3,tilePos[1]-tileSize/2,tileSize*2/3,tileSize);
+
+
+                        ctx.textAlign='center';
+                        ctx.textBaseline='middle';
+
+                        ctx.fillText(tileInfo.label,...tilePos);
+                        
+                        ctx.textBaseline='bottom';
+                        ctx.textAlign='right';
+                        ctx.fillText(tileInfo.left,tilePos[0]-tileSize/2,tilePos[1]-tileSize/16);
+
+                        ctx.textAlign='left';
+                        ctx.fillText(tileInfo.right,tilePos[0]+tileSize/3,tilePos[1]-tileSize/16);
                         break;
                     
                     case 'light':
@@ -108,6 +154,55 @@ const drawRadder=(ctx,radderInfo,x,y,tileSize)=>{
                         ctx.moveTo(...tilePos.map((v,i)=>{return v+(1-2*i)*tileSize/3/Math.sqrt(2)}));
                         ctx.lineTo(...tilePos.map((v,i)=>{return v-(1-2*i)*tileSize/3/Math.sqrt(2)}));
                         ctx.stroke();
+
+
+                        ctx.textAlign='center';
+                        ctx.textBaseline='bottom';
+
+                        ctx.fillText(tileInfo.label,tilePos[0],tilePos[1]-tileSize/2);
+                        
+                        ctx.textAlign='right';
+                        ctx.fillText(tileInfo.left,tilePos[0]-tileSize/3,tilePos[1]-tileSize/16);
+
+                        ctx.textAlign='left';
+                        ctx.fillText(tileInfo.right,tilePos[0]+tileSize/3,tilePos[1]-tileSize/16);
+                        break;
+                    
+                    case 'limit switch':
+                        ctx.beginPath();
+                        ctx.moveTo(tilePos[0]-tileSize/3,tilePos[1]);
+                        ctx.lineTo(tilePos[0]+tileSize/2,tilePos[1]+tileSize/3);
+                        ctx.moveTo(tilePos[0]+tileSize/3,tilePos[1]);
+                        ctx.lineTo(tilePos[0]+tileSize/3,tilePos[1]+tileSize/3);
+                        ctx.moveTo(tilePos[0]-tileSize/3,tilePos[1]);
+                        ctx.lineTo(tilePos[0],tilePos[1]);
+                        ctx.lineTo(tilePos[0],tilePos[1]+tileSize/4);
+
+                        ctx.stroke();
+                        ctx.closePath();
+
+                        ctx.textAlign='center';
+                        ctx.textBaseline='bottom';
+
+                        ctx.fillText(tileInfo.label,tilePos[0],tilePos[1]-tileSize/2);
+                        
+                        ctx.textAlign='right';
+                        ctx.fillText(tileInfo.left,tilePos[0]-tileSize/2,tilePos[1]-tileSize/16);
+
+                        ctx.textAlign='left';
+                        ctx.fillText(tileInfo.right,tilePos[0]+tileSize/3,tilePos[1]-tileSize/16);
+                        break;
+                    case 'dot line':
+                        
+                        break;
+                    case 'rect':
+                        ctx.clearRect(tilePos[0]-tileSize/2,tilePos[1]-tileSize/2,tileSize,tileSize);
+                        ctx.strokeRect(tilePos[0]-tileSize/2,tilePos[1]-tileSize/2,tileSize,tileSize);
+                        ctx.textAlign='center';
+                        ctx.textBaseline='middle';
+
+                        ctx.fillText(tileInfo.label,tilePos[0],tilePos[1]);                   
+                        break;
                 }
             }
         }
