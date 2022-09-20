@@ -203,6 +203,18 @@ const drawRadder=(ctx,radderInfo,x,y,tileSize)=>{
 
                         ctx.fillText(tileInfo.label,tilePos[0],tilePos[1]);                   
                         break;
+                    case 'solenoid':
+                        ctx.beginPath();
+                        ctx.moveTo(tilePos[0]-tileSize/3,tilePos[1]);
+                        ctx.lineTo(tilePos[0]-tileSize/6,tilePos[1]-tileSize/3);
+                        ctx.lineTo(tilePos[0]+tileSize/6,tilePos[1]+tileSize/3);
+                        ctx.lineTo(tilePos[0]+tileSize/3,tilePos[1]);
+                        ctx.stroke();
+                        ctx.textAlign='center';
+                        ctx.textBaseline='top';
+
+                        ctx.fillText(tileInfo.label,tilePos[0],tilePos[1]+tileSize/3);                   
+                        break;
                 }
             }
         }
