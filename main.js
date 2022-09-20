@@ -43,13 +43,13 @@ const save=()=>{
 
 const getPartsObject=()=>{
     const object={};
-    for(let i=0;i<parts.children.length;i++){
-        const partChar=parts.children[0].querySelector('[id*=part-char]').value;
+    for(let i=0;i<parts.childElementCount;i++){
+        const partChar=parts.children[i].querySelector('[id*=part-char]').value;
         object[partChar]={
-            type:parts.children[0].querySelector('[id*=type]').value,
-            label:parts.children[0].querySelector('[id*=label]').value,
-            left:parts.children[0].querySelector('[id*=left]').value,
-            right:parts.children[0].querySelector('[id*=right]').value
+            type:parts.children[i].querySelector('[id*=type]').value,
+            label:parts.children[i].querySelector('[id*=label]').value,
+            left:parts.children[i].querySelector('[id*=left]').value,
+            right:parts.children[i].querySelector('[id*=right]').value
         };
 
     }
