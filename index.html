@@ -5,20 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ラダー図メーカー</title>
-    <link rel="stylesheet" href="style.css"/>
+
+    <!--bootstrap style-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 </head>
 <body>
-    <div class="flex-parent">
-        <canvas id="canvas"></canvas>
-        <div id="circuit-code-div">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <canvas id="canvas" class="w-100 h-auto"></canvas>
+        </div>
+        <div class="col-11 col-md-6 mx-auto">
             <h1>配置</h1>
-            <textarea id="circuit-code"></textarea>
-            <h1>部品情報(JSON)</h1>
-            <textarea id="key"></textarea>
-            <br/>
-            <button onclick="adopt()">適応</button>
-            <button onclick="save()">保存</button>
+            <textarea
+            rows="10"
+            class="form-control mb-2"
+            style="font-family: 'MS Gothic' !important;"
+            id="circuit-code"></textarea>
+            <button class="btn btn-primary" onclick="adopt()">回路の更新</button>
+            <button class="btn btn-primary" onclick="save()">保存</button>
+            <h1>部品情報</h1>
+            <div class="">
+                
+            </div>
         </div>
     </div>
 
@@ -26,6 +35,10 @@
 
     <script src="script.js"></script>
 
+    <!--bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    
     <script>
         const circuitCode=document.getElementById('circuit-code');
         const keys=document.getElementById('key');
